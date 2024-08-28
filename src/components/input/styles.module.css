@@ -1,0 +1,19 @@
+.label {
+    font-size: 14px;
+}
+
+.input {
+    border: 1px solid #7c7c7c;
+    border-radius: 4px;
+    padding: 5px 10px;
+}
+
+.input:focus {
+    outline-color: var(--blue-light);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}

@@ -1,0 +1,27 @@
+.main {
+    border-radius: 10px;
+}
+
+.medium {
+    padding: 10px 20px
+}
+
+.small {
+    padding: 5px 10px
+}
+
+.primary {
+    color: white;
+    background-color: var(--blue);
+    border: none;
+}
+
+.secondary {
+    color: var(--blue);
+    border: 1px solid var(--blue);
+    background-color: white;
+}
+
+.secondary:hover {
+    background-color: var(--blue-light);
+}
