@@ -4,6 +4,7 @@ import styles from './styles.module.css';
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   name: string;
+  
 }
 
 export default function Input(props: Props) {

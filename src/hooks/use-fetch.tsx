@@ -1,19 +1,27 @@
-import React from "react";
-import { queryFetch, QueryFetchParams } from "../api/common";
+import React from 'react';
+import { ApiResult } from '../api/common';
 
-export default function useFetch(props: QueryFetchParams) {
+interface Props<T> {
+  useGet: Promise<ApiResult<T>>;
+  onError?: () => void;
+  onSuccess?: () => void;
+}
+
+export default function useFetch<T>(props: Props<T>) {
   const [loading, setLoading] = React.useState<boolean>(false);
-  const [res, setRes] = React.useState<any>();
+  const [res, setRes] = React.useState<ApiResult<T>>();
 
   const fetch = async () => {
     try {
       setLoading(true);
-      const res = await queryFetch(props);
-      setLoading(false);
+      const res = await props.useGet;
       setRes(res);
+      setLoading(false);
+      props.onSuccess?.();
       return;
     } catch {
-      console.error("failed to fetch");
+      console.error('failed to fetch');
+      props.onSuccess?.();
     } finally {
       setLoading(false);
     }

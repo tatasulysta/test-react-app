@@ -2,24 +2,26 @@ import React from 'react';
 import Input from '../../components/input';
 import styles from './styles.module.css';
 import Button from '../../components/button';
-import { queryFetch, setLoginToken } from '../../api/common';
-import { LoginInput, LoginModel, useLogin } from '../../api/auth';
 
-const DEFAULT_VALUES: LoginInput = {
+import { RegisterInput, useRegister } from '../../api/auth';
+import { useNavigate } from 'react-router';
+
+const DEFAULT_VALUES: RegisterInput = {
   email: '',
+  name: '',
   password: '',
 };
 
-export default function LoginPage() {
-  const [state, setState] = React.useState<LoginInput>(DEFAULT_VALUES);
+export default function RegisterPage() {
+  const [state, setState] = React.useState<RegisterInput>(DEFAULT_VALUES);
+  const navigate = useNavigate();
   const onSubmit = async () => {
     try {
-      const res = await useLogin(state);
-      setLoginToken(res.data.accessToken);
-      alert(res.message);
+      await useRegister(state);
+
+      navigate('/sign-in');
     } catch (e) {
-      alert('error login, please re-check');
-      console.error('Error login');
+      console.error('Error ');
     }
   };
   return (
@@ -31,7 +33,16 @@ export default function LoginPage() {
         }}
       >
         <div className={styles.container}>
-          <p className={styles.title}>Login</p>
+          <p className={styles.title}>Register</p>
+          <Input
+            type="text"
+            label="Name"
+            name="name"
+            value={state.name}
+            onChange={(e) =>
+              setState((prev) => ({ ...prev, name: e.target.value }))
+            }
+          />
           <Input
             type="email"
             label="Email"
@@ -49,7 +60,7 @@ export default function LoginPage() {
               setState((prev) => ({ ...prev, password: e.target.value }))
             }
           />
-          <Button type="submit">Sign In</Button>
+          <Button type="submit">Register</Button>
         </div>
       </form>
     </div>

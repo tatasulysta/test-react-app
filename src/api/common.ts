@@ -34,7 +34,6 @@ export const login = async (token: string) => {
 
 export const catchUnauthorized = (res: Response) => {
   if (res.status === 401) {
-    alert({ message: 'please re-login' });
     logout();
     return;
   }
@@ -54,7 +53,8 @@ export const queryFetch = async ({
       method: method,
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        // 'Access-Control-Allow-Origin': '*',
+        // CORS_ALLOW_ALL_ORIGINS: ' True',
         Accept: 'application/json',
         Authorization: `Bearer ${await getLoginToken()}`,
       },
