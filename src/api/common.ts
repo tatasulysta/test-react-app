@@ -11,8 +11,8 @@ export type QueryFetchParams = {
   params?: { [key: string]: any };
 };
 
-const BASE_URL = 'https://notes-api.dicoding.dev/v1';
-const LOCAL_STORE_AUTH_KEY = 'user-token';
+const BASE_URL = process.env.REACT_APP_BASE_URL;
+const LOCAL_STORE_AUTH_KEY = process.env.REACT_APP_TOKEN_KEY!;
 
 export const setLoginToken = (bearer: string) =>
   localStorage.setItem(LOCAL_STORE_AUTH_KEY, bearer);
