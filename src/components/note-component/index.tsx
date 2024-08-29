@@ -19,7 +19,7 @@ export default function NoteComponent(props: Props) {
         variant="secondary"
         onClick={() => onArchiveAction(id, archived ? 'unarchive' : 'archive')}
       >
-        {archived ? 'Archived' : 'Unarchived'}
+        {!archived ? 'Archived' : 'Unarchived'}
       </Button>
     </div>
   );
