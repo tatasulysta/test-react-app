@@ -9,13 +9,17 @@ export interface NoteModel {
   createdAt: string;
 }
 
-export type GetNoteParams = { archived?: boolean };
+const ENDPOINT = 'notes';
 
-export const useGetNotes = async (
-  params: GetNoteParams,
-): Promise<ApiResult<NoteModel[]>> =>
+export const useGetNotes = async (): Promise<ApiResult<NoteModel[]>> =>
   await queryFetch({
-    endpoint: `notes${params.archived ? '/archived' : ''}`,
+    endpoint: ENDPOINT,
+    method: 'GET',
+  });
+
+export const useGetArchivedNotes = async (): Promise<ApiResult<NoteModel[]>> =>
+  await queryFetch({
+    endpoint: `${ENDPOINT}/archived`,
     method: 'GET',
   });
 
@@ -28,7 +32,7 @@ export const useCreateNote = async (
   body: NoteInput,
 ): Promise<ApiResult<NoteModel>> =>
   await queryFetch({
-    endpoint: 'notes',
+    endpoint: ENDPOINT,
     method: 'POST',
     body,
   });

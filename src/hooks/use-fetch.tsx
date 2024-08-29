@@ -11,7 +11,7 @@ export default function useFetch<T>(props: Props<T>) {
   const [loading, setLoading] = React.useState<boolean>(false);
   const [res, setRes] = React.useState<ApiResult<T>>();
 
-  const fetch = async () => {
+  const fetch = React.useCallback(async () => {
     try {
       setLoading(true);
       const res = await props.useGet;
@@ -25,10 +25,11 @@ export default function useFetch<T>(props: Props<T>) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [props.useGet]);
+
   React.useEffect(() => {
     fetch();
   }, []);
 
-  return { res, loading };
+  return { res, loading, refetch: fetch };
 }

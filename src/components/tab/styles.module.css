@@ -1,0 +1,16 @@
+.header_container--inner {
+    display: flex;
+    align-items: center;
+
+}
+
+.header_container--inner button {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.header_container--outer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
