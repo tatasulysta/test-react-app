@@ -16,7 +16,6 @@ const router = createBrowserRouter(
     <Route path="/">
       <Route path="sign-in" element={<LoginPage />} />
       <Route path="sign-up" element={<RegisterPage />} />
-      {/* <Route path="signup" element={<Signup />} /> */}
       <Route element={<PrivateRoute />}>
         <Route index element={<MainPage />} />
         <Route path="create" element={<MainCreate />} />

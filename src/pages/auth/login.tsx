@@ -5,6 +5,7 @@ import Button from '../../components/button';
 import { setLoginToken } from '../../api/common';
 import { LoginInput, useLogin } from '../../api/auth';
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const DEFAULT_VALUES: LoginInput = {
   email: '',
@@ -52,6 +53,9 @@ export default function LoginPage() {
             }
           />
           <Button type="submit">Sign In</Button>
+          <p>
+            Dont have account register <Link to="/sign-up">here</Link>
+          </p>
         </div>
       </form>
     </div>

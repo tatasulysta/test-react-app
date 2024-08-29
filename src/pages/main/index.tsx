@@ -12,17 +12,18 @@ import Button from '../../components/button';
 import styles from './styles.module.css';
 import { useNavigate } from 'react-router';
 import Tab from '../../components/tab';
+import { logout } from '../../api/common';
 
 export default function MainPage() {
   const { res, loading, refetch } = useFetch<NoteModel[]>({
-    useGet: useGetNotes(),
+    useGet: useGetNotes,
   });
   const {
     res: archivedRes,
     loading: loadArchived,
     refetch: reArchive,
   } = useFetch<NoteModel[]>({
-    useGet: useGetArchivedNotes(),
+    useGet: useGetArchivedNotes,
   });
 
   const navigate = useNavigate();
@@ -94,6 +95,11 @@ export default function MainPage() {
           />
         </>
       )}
+      <div className={styles.logout_btn}>
+        <Button variant="secondary" onClick={logout}>
+          Logout
+        </Button>
+      </div>
     </div>
   );
 }

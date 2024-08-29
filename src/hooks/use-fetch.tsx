@@ -2,7 +2,7 @@ import React from 'react';
 import { ApiResult } from '../api/common';
 
 interface Props<T> {
-  useGet: Promise<ApiResult<T>>;
+  useGet: () => Promise<ApiResult<T>>;
   onError?: () => void;
   onSuccess?: () => void;
 }
@@ -14,7 +14,7 @@ export default function useFetch<T>(props: Props<T>) {
   const fetch = React.useCallback(async () => {
     try {
       setLoading(true);
-      const res = await props.useGet;
+      const res = await props.useGet();
       setRes(res);
       setLoading(false);
       props.onSuccess?.();
@@ -28,7 +28,9 @@ export default function useFetch<T>(props: Props<T>) {
   }, [props.useGet]);
 
   React.useEffect(() => {
-    fetch();
+    if (!loading) {
+      fetch();
+    }
   }, []);
 
   return { res, loading, refetch: fetch };
