@@ -36,3 +36,15 @@ export const useCreateNote = async (
     method: 'POST',
     body,
   });
+
+export const useArchiveNote = async (id: string): Promise<ApiResult<any>> =>
+  await queryFetch({
+    endpoint: `${ENDPOINT}/${id}/archive`,
+    method: 'POST',
+  });
+
+export const useUnArchiveNote = async (id: string): Promise<ApiResult<any>> =>
+  await queryFetch({
+    endpoint: `${ENDPOINT}/${id}/unarchive`,
+    method: 'POST',
+  });
